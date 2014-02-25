@@ -1,0 +1,24 @@
+<div class="row">
+<%= render 'shared/error_messages' %>
+<div class="heading-panel"><h1>Add shipping address</h1></div>
+    <%= form_for(current_customer) do |f| %>
+
+	    <div class="large-6 columns">
+		  <%= f.label :Address_Line_1 %>
+	      <%= f.text_field :sh_address1 %>
+	      <%= f.label :Address_Line_2 %>
+	      <%= f.text_field :sh_address2 %>
+        </div>
+
+        <div class="large-6 columns">
+          <%= f.label :City %>
+      	  <%= f.text_field :sh_city %>	  
+     	  <%= f.label :State %>
+      	  <%= f.text_field :sh_state %>
+      	  <%= f.label :ZIP %>
+      	  <%= f.text_field :sh_zipcode %>	 
+		</div>
+		<%= f.submit "Save changes", class: "cEdit-button" %>
+	    <% end %>
+
+</div>

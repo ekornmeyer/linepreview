@@ -1,0 +1,82 @@
+<div class="row">
+<%= render 'shared/error_messages' %>
+<div class="heading-panel"><h1>Update your profile</h1></div>
+    <%= form_for(@customer) do |f| %>
+	<dl class="tabs vertical radius" data-tab>
+	  <dd class="active"><a href="#passwordT">Change Password</a></dd>
+	  <dd><a href="#generalT">General Info</a></dd>
+	  <dd><a href="#addressT">Address Info</a></dd>
+	  <dd><%= f.submit "Save changes", class: "cEdit-button" %></dd>
+	</dl>
+
+	<div class="tabs-content vertical">
+
+	  <div class="content active" id="passwordT">
+	    <%= f.label :new_password %>
+        <%= f.password_field :password %>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+	  </div>
+
+	  <div class="content" id="generalT">
+	    <%= f.label :email %>
+        <%= f.text_field :email, disabled: true %>	  
+	    <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+        <%= f.label :phone %>
+        <%= f.text_field :phone %>
+	  </div>
+
+	  <div class="content" id="addressT">
+
+		<div>
+		  <h4>Shipping Address</h4>
+		  <%= check_box_tag(:copy_shipping) %>
+	      <%= label_tag(:copy_shipping, "Copy these settings to my billing address") %>
+	    </div>
+
+	    <div class="large-6 columns">
+		  <%= f.label :Address_Line_1 %>
+	      <%= f.text_field :sh_address1 %>
+	      <%= f.label :Address_Line_2 %>
+	      <%= f.text_field :sh_address2 %>
+        </div>
+
+        <div class="large-6 columns">
+          <%= f.label :City %>
+      	  <%= f.text_field :sh_city %>	  
+     	  <%= f.label :State %>
+      	  <%= f.text_field :sh_state %>
+      	  <%= f.label :ZIP %>
+      	  <%= f.text_field :sh_zipcode %>	 
+		</div>
+
+		<div>
+		<h4>Billing Address</h4>
+		</div>
+
+		<div class="large-6 columns">
+      	  <%= f.label :Address_Line_1 %>
+      	  <%= f.text_field :bi_address1 %>
+      	  <%= f.label :Address_Line_2 %>
+      	  <%= f.text_field :bi_address2 %>	 
+        </div>
+
+		<div class="large-6 columns">
+      	  <%= f.label :City %>
+      	  <%= f.text_field :bi_city %>	  
+      	  <%= f.label :State %>
+      	  <%= f.text_field :bi_state %>
+      	  <%= f.label :ZIP %>
+      	  <%= f.text_field :bi_zipcode %>
+        </div>
+
+	  </div>
+	</div>
+
+	    
+	    <% end %>
+
+</div>

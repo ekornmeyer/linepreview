@@ -1,0 +1,39 @@
+<div class="row">
+<div class="large-6 columns">
+<img src="<%= @product.default_img_url %>" />
+<h3><%= @product.name %> - <%= @product.product_code %></h3>
+<p><%= @product.description %></p>
+<h4><%= number_to_currency(@product.unit_price) %></h4>
+
+
+<!-- Create a get form that goes to the same /orders/initialize_order method -->
+<%= form_tag('/orders/initialize_order', method: :get) do %>
+  <%= label_tag(:product_qty, "Quantity:") %> <!-- Create a label for the field -->
+  <%= text_field_tag(:product_qty, '1') %> <!-- create a text box for quantity -->
+  <%= hidden_field_tag(:product_code, @product.product_code) %> <!-- create a hidden text box to store product code -->
+  <%= submit_tag("Add to Cart") %>
+<% end %>
+</div>
+<div class="large-6 columns">
+<% if signed_in? %>
+<% @assets.each do |asset| %>
+<a href="#" onclick="window.location = '/order_process?prod_id=<%= @product.id %>&asset_id=<%= asset.id %>'"><%= image_tag asset.file_name.url(:dashboard).to_s %></a>
+<% end %>
+<% else %>
+You don't have any images
+<% end %>
+</div>
+</div>
+
+<div class="row text-center">
+<p>Click an uploaded image to preview</p>
+<% if !session[:cookies_orderid].nil? %>
+<% @get_lines['Lines'].each do |line| %>
+<% preview_url = "#{line['LinePreviewThumbnail']}&maxSize=300" %>
+<%= image_tag preview_url %>
+<%= @get_lines %>
+<% end %>
+<% else %>
+<p>No order</p>
+<% end %>
+</div>

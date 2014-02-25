@@ -1,0 +1,24 @@
+<div class="row">
+<%= render 'shared/error_messages' %>
+<div class="heading-panel"><h1>Add billing address</h1></div>
+    <%= form_for(current_customer) do |f| %>
+
+	    <div class="large-6 columns">
+		  <%= f.label :Address_Line_1 %>
+	      <%= f.text_field :bi_address1 %>
+	      <%= f.label :Address_Line_2 %>
+	      <%= f.text_field :bi_address2 %>
+        </div>
+
+        <div class="large-6 columns">
+          <%= f.label :City %>
+      	  <%= f.text_field :bi_city %>	  
+     	  <%= f.label :State %>
+      	  <%= f.text_field :bi_state %>
+      	  <%= f.label :ZIP %>
+      	  <%= f.text_field :bi_zipcode %>	 
+		</div>
+		<%= f.submit "Save changes", class: "cEdit-button" %>
+	    <% end %>
+
+</div>

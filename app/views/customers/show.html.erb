@@ -1,0 +1,52 @@
+<div id="custDashboard">
+
+<div class="row"><h2>My Dashboard</h2></div>
+
+<div class="row">
+
+<div class="large-6 columns dashboard-panel">
+<div class="dashTitle"><h3>Assets</h4></div>
+<span class="secondary label radius">Images</span>
+<% if @assets.empty? %>
+<p>You don't have any images. <%= link_to "Add one", '#', :class => 'tiny success button radius' %></p>
+<% else %>
+	<% @assets.each do |asset| %>
+		<h4><%= asset.file_name.file.filename %></h4>
+		<%= link_to [current_customer, asset], :class => 'th' do %>
+		  <%= image_tag asset.file_name.url(:dashboard).to_s %>
+		<% end %>
+		<%= link_to "Customize", '#', :class => 'tiny secondary button radius' %>
+		<%= link_to "Remove", [current_customer, asset], method: :delete, :class => 'tiny secondary button radius' %>
+	<% end %>
+<% end %>
+</div>
+<div class="large-6 columns dashboard-panel">
+<div class="dashTitle"><h3>Info</h4></div>
+<span class="secondary label radius">Shipping Address</span>
+<% if @customer.sh_address1.nil? %>
+<p>You don't have a shipping address. <%= link_to "Add one", '#', "data-reveal-id" => "modShAddr", :class => 'tiny success button radius' %></p>
+<% else %>
+<p><%= @customer.sh_address1 %><br />
+<%= @customer.sh_address2 %><br />
+<%= @customer.sh_city %>, <%= @customer.sh_state %> <%= @customer.sh_zipcode %></p>
+<% end %>
+<span class="secondary label radius">Billing Address</span>
+<% if @customer.bi_address1.nil? %>
+<p>You don't have a billing address. <%= link_to "Add one", '#', "data-reveal-id" => "modBiAddr", :class => 'tiny success button radius' %></p>
+<% else %>
+<p><%= @customer.bi_address1 %></p>
+<p><%= @customer.bi_address2 %></p>
+<p><%= @customer.bi_city %>, <%= @customer.bi_state %> <%= @customer.bi_zipcode %></p>
+<% end %>
+</div>
+
+</div>
+
+
+<div id="modShAddr" class="reveal-modal" data-reveal>
+<%= render 'shared/shipping_addr_form' %>
+</div>
+<div id="modBiAddr" class="reveal-modal" data-reveal>
+<%= render 'shared/billing_addr_form' %>
+</div>
+</div>
